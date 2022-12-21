@@ -1,6 +1,7 @@
 package ru.maslennikov.island.domain.island;
 
 import ru.maslennikov.island.utilite.ialand_object_factory.HerbivorousFactory;
+import ru.maslennikov.island.utilite.ialand_object_factory.PlantFactory;
 import ru.maslennikov.island.utilite.ialand_object_factory.PredatorFactory;
 
 import java.util.Map;

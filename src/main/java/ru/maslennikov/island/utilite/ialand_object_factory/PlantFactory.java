@@ -1,4 +1,4 @@
-package ru.maslennikov.island.domain.island;
+package ru.maslennikov.island.utilite.ialand_object_factory;
 
 import ru.maslennikov.island.domain.plant.Grass;
 import ru.maslennikov.island.domain.plant.Plant;
