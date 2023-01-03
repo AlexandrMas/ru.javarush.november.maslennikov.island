@@ -1,9 +1,7 @@
 package ru.maslennikov.island.maker;
 
+import ru.maslennikov.island.handler.Handler;
 import ru.maslennikov.island.island.Location;
-import ru.maslennikov.island.maker.OrganismFactory.HerbivorousFactory;
-import ru.maslennikov.island.maker.OrganismFactory.PlantFactory;
-import ru.maslennikov.island.maker.OrganismFactory.PredatorFactory;
 import ru.maslennikov.island.setting.Setting;
 
 import java.util.Map;
@@ -33,36 +31,19 @@ public class CreatorOfIsland {
     }
 
     private void determineMaxNumberOfOrganismsInLocation(Location location) {
-        for (Map.Entry<String, Integer> organism : location.getMaxNumberOfOrganismsOfThisTypeInLocation().entrySet()) {
-            fillingLocationWithOrganisms(location, organism);
+        for (Map.Entry<String, Integer> organismInLocation : Setting.get().getMaxNumberOfOrganismsOfThisTypeInLocation().entrySet()) {
+            fillingLocationWithOrganisms(location, organismInLocation.getKey());
         }
     }
 
-    private void fillingLocationWithOrganisms(Location location, Map.Entry<String, Integer> organisms) {
-        PredatorFactory predatorFactory = new PredatorFactory();
-        HerbivorousFactory herbivorousFactory = new HerbivorousFactory();
-        PlantFactory plantFactory = new PlantFactory();
-        for (int i = 0; i < ThreadLocalRandom.current().nextInt(organisms.getValue()); i++) {
-            if (organisms.getKey().equalsIgnoreCase("wolf")
-                    || organisms.getKey().equalsIgnoreCase("boa")
-                    || organisms.getKey().equalsIgnoreCase("fox")
-                    || organisms.getKey().equalsIgnoreCase("bear")
-                    || organisms.getKey().equalsIgnoreCase("eagle")) {
-                location.getPredatorsOfLocation().add(predatorFactory.createOrganism(organisms.getKey()));
-            } else if (organisms.getKey().equalsIgnoreCase("hours")
-                    || organisms.getKey().equalsIgnoreCase("deer")
-                    || organisms.getKey().equalsIgnoreCase("rabbit")
-                    || organisms.getKey().equalsIgnoreCase("mouse")
-                    || organisms.getKey().equalsIgnoreCase("goat")
-                    || organisms.getKey().equalsIgnoreCase("sheep")
-                    || organisms.getKey().equalsIgnoreCase("boar")
-                    || organisms.getKey().equalsIgnoreCase("buffalo")
-                    || organisms.getKey().equalsIgnoreCase("duck")
-                    || organisms.getKey().equalsIgnoreCase("caterpillar")) {
-                location.getHerbivorousOfLocation().add(herbivorousFactory.createOrganism(organisms.getKey()));
-            } else if (organisms.getKey().equalsIgnoreCase("plant")) {
-                location.getPlantsOfLocation().add(plantFactory.createOrganism(organisms.getKey()));
-            }
-        }
+
+    private void fillingLocationWithOrganisms(Location location, String name) {
+        Handler handler = new Handler();
+        int origin = Setting.get().getMaxNumberOfOrganismsOfThisTypeInLocation().get(name) / 2;
+        int bound = ThreadLocalRandom.current().nextInt(origin + 1, Setting.get().getMaxNumberOfOrganismsOfThisTypeInLocation().get(name) - 1);
+        int minNumberOfIndividualsInLocation = ThreadLocalRandom.current().nextInt(origin, bound);
+        handler.populateLocationWithPredators(location, name, minNumberOfIndividualsInLocation);
+        handler.populateLocationWithHerbivorous(location, name, minNumberOfIndividualsInLocation);
+        handler.plantLocationWithPlants(location, name);
     }
 }

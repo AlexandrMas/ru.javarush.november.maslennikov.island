@@ -1,8 +1,9 @@
 {
-  "maxWidthOfIsland": 10,
-  "maxHeightOfIsland": 10,
+  "maxWidthOfIsland": 2,
+  "maxHeightOfIsland": 2,
+  "maxNumberOfPlantsEatenByOneAnimal": 1,
   "probabilityOfEatingOrganism": {
-    "wolf": {
+    "Wolf": {
       "Horse": 10,
       "Deer": 15,
       "Rabbit": 60,
@@ -95,5 +96,22 @@
     "Duck": 200,
     "Caterpillar": 1000,
     "Plant": 200
+  },
+  "maxNumberOfOffspring": {
+    "Wolf": 3,
+    "Boa": 3,
+    "Fox": 3,
+    "Bear": 1,
+    "Eagle": 2,
+    "Horse": 2,
+    "Deer": 2,
+    "Rabbit": 15,
+    "Mouse": 50,
+    "Goat": 14,
+    "Sheep": 14,
+    "Boar": 5,
+    "Buffalo": 1,
+    "Duck": 20,
+    "Caterpillar": 100
   }
 }

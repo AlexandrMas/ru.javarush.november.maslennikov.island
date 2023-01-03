@@ -14,5 +14,5 @@ public @interface BasicCharacteristicsOrganism {
 
     int maxTravelSpeed();
 
-    double requiredAmountOfFoodToSatisfy();
+    double satiation();
 }

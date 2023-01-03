@@ -15,17 +15,17 @@ public class Setting {
 
     private static volatile Setting settings;
 
-    int maxWidthOfIsland;
+    private int maxWidthOfIsland;
 
-    int maxHeightOfIsland;
+    private int maxHeightOfIsland;
 
-    Map<String, Map<String, Integer>> probabilityOfEatingOrganism;
+    private Map<String, Integer> maxNumberOfOffspring;
 
-    public Map<String, Map<String, Integer>> getProbabilityOfEatingOrganism() {
-        return probabilityOfEatingOrganism;
-    }
+    private volatile int maxNumberOfPlantsEatenByOneAnimal;
 
-    Map<String, Integer> maxNumberOfOrganismsOfThisTypeInLocation;
+    private Map<String, Map<String, Integer>> probabilityOfEatingOrganism;
+
+    private Map<String, Integer> maxNumberOfOrganismsOfThisTypeInLocation;
 
     private Setting() {
         try {
@@ -37,6 +37,18 @@ public class Setting {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Map<String, Map<String, Integer>> getProbabilityOfEatingOrganism() {
+        return probabilityOfEatingOrganism;
+    }
+
+    public int getMaxNumberOfPlantsEatenByOneAnimal() {
+        return maxNumberOfPlantsEatenByOneAnimal;
+    }
+
+    public Map<String, Integer> getMaxNumberOfOffspring() {
+        return maxNumberOfOffspring;
     }
 
     public int getMaxWidthOfIsland() {
@@ -54,7 +66,7 @@ public class Setting {
     public static Setting get() {
         if (Objects.isNull(settings)) {
             synchronized (Setting.class) {
-                if (Objects.isNull(settings = Setting.settings)) {
+                if (Objects.isNull(settings)) {
                     settings = new Setting();
                 }
             }
