@@ -1,6 +1,6 @@
 {
-  "maxWidthOfIsland": 2,
-  "maxHeightOfIsland": 2,
+  "maxWidthOfIsland": 10,
+  "maxHeightOfIsland": 10,
   "maxNumberOfPlantsEatenByOneAnimal": 1,
   "probabilityOfEatingOrganism": {
     "Wolf": {
