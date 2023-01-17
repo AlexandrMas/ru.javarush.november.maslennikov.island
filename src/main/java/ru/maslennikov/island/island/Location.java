@@ -22,10 +22,6 @@ public class Location {
     private final Map<String, Integer> statisticOfLocation;
     private final Lock lock;
 
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
     public Location(int xCoordinate, int yCoordinate) {
         coordinates = new Coordinates(xCoordinate, yCoordinate);
         predatorsOfLocation = new ArrayList<>();
@@ -35,17 +31,40 @@ public class Location {
         lock = new ReentrantLock(true);
     }
 
+
     public Map<String, Integer> getStatisticOfLocation() {
         this.lock.lock();
-        Setting.get().getMaxNumberOfOrganismsOfThisTypeInLocation().keySet().stream().forEach(nameAnimal -> statisticOfLocation.put(nameAnimal, 0));
+        statisticOfLocation.clear();
+        {
+            statisticOfLocation.put("🐗", 0);
+            statisticOfLocation.put("🐻", 0);
+            statisticOfLocation.put("🐛", 0);
+            statisticOfLocation.put("🐺", 0);
+            statisticOfLocation.put("🐐", 0);
+            statisticOfLocation.put("🐎", 0);
+            statisticOfLocation.put("🐍", 0);
+            statisticOfLocation.put("🐑", 0);
+            statisticOfLocation.put("🐇", 0);
+            statisticOfLocation.put("🦆", 0);
+            statisticOfLocation.put("🦌", 0);
+            statisticOfLocation.put("🦊", 0);
+            statisticOfLocation.put("🌿", 0);
+            statisticOfLocation.put("🦅", 0);
+            statisticOfLocation.put("🐃", 0);
+            statisticOfLocation.put("🐁", 0);
+        }
         List<Organism> generalListOfLocation = new ArrayList<>(this.getPredatorsOfLocation());
-        generalListOfLocation.addAll(this.herbivorousOfLocation);
+        generalListOfLocation.addAll(this.getHerbivorousOfLocation());
         generalListOfLocation.addAll(this.getPlantsOfLocation());
         generalListOfLocation.stream().forEach(animal -> {
-            statisticOfLocation.put(animal.getName(), statisticOfLocation.get(animal.getName()) + 1);
+            statisticOfLocation.put(animal.getIcon(), statisticOfLocation.get(animal.getIcon()) + 1);
         });
         this.lock.unlock();
         return statisticOfLocation;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     public List<Predator> getPredatorsOfLocation() {

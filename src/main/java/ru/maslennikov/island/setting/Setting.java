@@ -19,9 +19,9 @@ public class Setting {
 
     private int maxHeightOfIsland;
 
-    private Map<String, Integer> maxNumberOfOffspring;
+    private int minNumberOrganismOfLocation;
 
-    private volatile int maxNumberOfPlantsEatenByOneAnimal;
+    private Map<String, Integer> maxNumberOfOffspring;
 
     private Map<String, Map<String, Integer>> probabilityOfEatingOrganism;
 
@@ -43,8 +43,8 @@ public class Setting {
         return probabilityOfEatingOrganism;
     }
 
-    public int getMaxNumberOfPlantsEatenByOneAnimal() {
-        return maxNumberOfPlantsEatenByOneAnimal;
+    public int getMinNumberOrganismOfLocation() {
+        return minNumberOrganismOfLocation;
     }
 
     public Map<String, Integer> getMaxNumberOfOffspring() {
